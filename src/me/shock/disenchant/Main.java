@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -25,7 +26,7 @@ public class Main extends JavaPlugin
 	
     PluginManager pm;
 	FileConfiguration newConfig;
-    private Logger log;
+    private Logger log = Bukkit.getLogger();
     public static Economy econ = null;
   
   public void onEnable()
@@ -95,7 +96,7 @@ public class Main extends JavaPlugin
     	  double balance = econ.getBalance(sender.getName());
     	  EconomyResponse r = econ.withdrawPlayer(player, cost);
     	  
-    	  if (balance >= cost)
+    	  if (balance >= cost && r.transactionSuccess())
     	  {
     		  
     		  // removing all enchantments

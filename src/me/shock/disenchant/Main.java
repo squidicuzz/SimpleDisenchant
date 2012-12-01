@@ -74,11 +74,11 @@ public class Main extends JavaPlugin
 	this.usevault = Boolean.valueOf(this.newConfig.getBoolean("usevault", false));
 	this.cost = Double.valueOf(this.newConfig.getDouble("cost"));
 	saveConfig();
-	this.log.info("[AntiInvisible] config loaded");
+	this.log.info("[SimpleDisenchant] config loaded");
    }
     catch (Exception e) 
      {
-	  this.log.log(Level.SEVERE, "[AntiInvisibility] Failed to load AntiInvisibility config", e);
+	  this.log.log(Level.SEVERE, "[SimpleDisenchant] Failed to load SimpleDisenchant config", e);
 	  e.printStackTrace();
 	  // Hopefully never happens :o
      }

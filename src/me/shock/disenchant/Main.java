@@ -95,6 +95,9 @@ public class Main extends JavaPlugin
     	  if (balance >= cost)
     	  {
     		  
+    		  // take money
+    		  
+    		  
     		  // removing all enchantments
     		  ItemStack item = ((Player)sender).getItemInHand();
    	          item.removeEnchantment(Enchantment.ARROW_DAMAGE);
@@ -119,7 +122,7 @@ public class Main extends JavaPlugin
   	          item.removeEnchantment(Enchantment.SILK_TOUCH);
   	          item.removeEnchantment(Enchantment.WATER_WORKER);
   	        
-            sender.sendMessage(ChatColor.GREEN + "Your enchantments are gone :o");
+              sender.sendMessage(ChatColor.GREEN + "Your enchantments are gone :o");
             
     	  }
     	  else

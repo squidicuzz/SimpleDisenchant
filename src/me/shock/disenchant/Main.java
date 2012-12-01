@@ -20,9 +20,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.pandemoneus.obsidianDestroyer.Metrics;
-import com.pandemoneus.obsidianDestroyer.ObsidianDestroyer;
-
 public class Main extends JavaPlugin
 {
 	Boolean usevault;

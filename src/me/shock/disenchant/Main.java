@@ -40,7 +40,7 @@ public class Main extends JavaPlugin
 			log.info("[SimpleDisenchant] not using economy");
 		}
 		loadConfig();
-  }
+	}
 
 	public void onDisable()
 	{
@@ -60,7 +60,7 @@ public class Main extends JavaPlugin
 		}
 		econ = rsp.getProvider();
 		return econ != null;
-  }
+	}
   
 	private void loadConfig() 
 	{

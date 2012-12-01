@@ -93,6 +93,15 @@ public class Main extends JavaPlugin
       if (cmd.getName().equalsIgnoreCase("disenchant") && sender.hasPermission("disenchant.use"))
       {
     	  String player = sender.getName();
+		  ItemStack item = ((Player)sender).getItemInHand();
+		  
+		  if (item.getEnchantments().size() < 1)
+		  {
+			  // Send message that item does not contain enchantments..
+			  sender.sendMessage(ChatColor.RED + "The item your are holding has no Enchantments!");
+			  return true;
+		  }
+		  
     	  double balance = econ.getBalance(sender.getName());
     	  EconomyResponse r = econ.withdrawPlayer(player, cost);
     	  
@@ -100,7 +109,6 @@ public class Main extends JavaPlugin
     	  {
     		  
     		  // removing all enchantments
-    		  ItemStack item = ((Player)sender).getItemInHand();
    	          item.removeEnchantment(Enchantment.ARROW_DAMAGE);
   	          item.removeEnchantment(Enchantment.ARROW_FIRE);
   	          item.removeEnchantment(Enchantment.ARROW_INFINITE);

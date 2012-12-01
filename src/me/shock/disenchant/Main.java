@@ -1,5 +1,6 @@
 package me.shock.disenchant;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
@@ -28,17 +29,18 @@ public class Main extends JavaPlugin
     public static Economy econ = null;
   
   public void onEnable()
-  {  
-	  this.pm = getServer().getPluginManager();
-		
-	  if (!setupEconomy() ) 
+  {
+	  try 
 	  {
-          log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-          getServer().getPluginManager().disablePlugin(this);
-          return;
-      }
-		
+	  setupEconomy();
+	  }
+	  catch(Exception e)
+	  {
+		  log.info("[SimpleDisenchant] can't find vault :(");
+		  log.info("[SimpleDisenchant] not using economy");
+	  }
 	  loadConfig();
+	
   }
 
   public void onDisable()
@@ -48,37 +50,38 @@ public class Main extends JavaPlugin
   
   private boolean setupEconomy() 
   {
-      if (getServer().getPluginManager().getPlugin("Vault") == null) {
+      if (getServer().getPluginManager().getPlugin("Vault") == null) 
+      {
           return false;
       }
       RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-      if (rsp == null) {
+      if (rsp == null) 
+      {
           return false;
       }
       econ = rsp.getProvider();
       return econ != null;
   }
   
-  public void loadConfig()
+  private void loadConfig() 
   {
-	  
-	  try {
-			reloadConfig();
-			this.newConfig = getConfig();
-			this.newConfig.options().copyDefaults(true);
-			
-			this.usevault = Boolean.valueOf(this.newConfig.getBoolean("use_vault", false));
-			this.cost = Double.valueOf(this.newConfig.getDouble("cost"));
-			saveConfig();
-			this.log.info("[SimpleDisenchant] config loaded");
-		      }
-		    catch (Exception e) 
-		  {
-			  this.log.severe("[SimpleDisenchant] Failed to load config");
-			  e.printStackTrace();
-			  // Hopefully never happens :o
-		  }
-	  
+  try 
+   {
+	reloadConfig();
+	this.newConfig = getConfig();
+	this.newConfig.options().copyDefaults(true);
+	
+	this.usevault = Boolean.valueOf(this.newConfig.getBoolean("usevault", false));
+	this.cost = Double.valueOf(this.newConfig.getDouble("cost"));
+	saveConfig();
+	this.log.info("[AntiInvisible] config loaded");
+   }
+    catch (Exception e) 
+     {
+	  this.log.log(Level.SEVERE, "[AntiInvisibility] Failed to load AntiInvisibility config", e);
+	  e.printStackTrace();
+	  // Hopefully never happens :o
+     }
   }
   
   
@@ -136,6 +139,5 @@ public class Main extends JavaPlugin
     }
     // If the sender isn't a player.
     return false;
-  }
-
+}
 }

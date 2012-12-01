@@ -3,3 +3,4 @@ main: me.shock.disenchant.Main
 version: 1.1
 commands:
   disenchant:
+depend: [Vault]

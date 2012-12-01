@@ -1,5 +1,6 @@
 package me.shock.disenchant;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,9 +15,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.pandemoneus.obsidianDestroyer.Metrics;
+import com.pandemoneus.obsidianDestroyer.ObsidianDestroyer;
 
 public class Main extends JavaPlugin
 {
@@ -40,11 +45,25 @@ public class Main extends JavaPlugin
 			log.info("[SimpleDisenchant] not using economy");
 		}
 		loadConfig();
+		
+		// start Metrics
+		startMetrics();
 	}
 
 	public void onDisable()
 	{
 
+	}
+	
+	public void startMetrics() { 	
+		PluginDescriptionFile pdfFile = this.getDescription();
+		try {	
+			Metrics metrics = new Metrics(this);	
+			metrics.start();
+			this.log.info("[" + pdfFile.getName() + "] Metrics connection started.");
+		} catch (IOException e) {
+			this.log.warning("[" + pdfFile.getName() + "] Failed to submit the stats :-("); // Failed to submit the stats :-(
+		}
 	}
   
 	private boolean setupEconomy() 
